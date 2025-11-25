@@ -5,6 +5,7 @@ extends RigidBody3D
 @export var drag_strength: float = 6.0   # How strongly item follows mouse
 @export var line_break_distance: float = 1.5  # Maximum distance before line breaks
 @export var damping: float = 0.2  # Lower = more momentum
+@export var rotation_damping: float = 0.5  # Damping for angular velocity
 
 # State
 var is_dragging: bool = false
@@ -32,7 +33,11 @@ func _ready():
 	
 	# Set damping for momentum feel
 	linear_damp = damping
-	angular_damp = 1.0
+	angular_damp = rotation_damping
+	
+	# Set center of mass slightly lower for better tipping physics
+	center_of_mass_mode = RigidBody3D.CENTER_OF_MASS_MODE_CUSTOM
+	center_of_mass = Vector3(0, -0.1, 0)  # Slightly below center
 
 func setup_line():
 	var line_node = $Line3D
@@ -66,6 +71,10 @@ func _input(event):
 				
 				var space_state = get_world_3d().direct_space_state
 				var query = PhysicsRayQueryParameters3D.create(from, to)
+				
+				# Only check collision layer 3 (bit 2) - grocery items only
+				query.collision_mask = 4  # Binary: 0100 = Layer 3
+				
 				var result = space_state.intersect_ray(query)
 				
 				if result and result.collider == self:
@@ -77,15 +86,17 @@ func start_drag():
 	is_dragging = true
 	gravity_scale = 0.0
 	# Don't zero velocity - let it keep momentum
-	angular_velocity = Vector3.ZERO
+	# Keep angular velocity for more dynamic feel
 	last_position = global_position
 	linear_damp = damping * 2.0  # Slightly more damping while dragging
+	angular_damp = rotation_damping * 3.0  # More rotation damping while dragging
 	print("Started dragging item")
 
 func stop_drag():
 	is_dragging = false
 	gravity_scale = 2.0
 	linear_damp = damping  # Back to normal damping
+	angular_damp = rotation_damping  # Back to normal rotation damping
 	print("Stopped dragging item")
 
 func _physics_process(delta):
@@ -151,12 +162,17 @@ func draw_line():
 	line_mesh.clear_surfaces()
 	
 	if is_dragging:
-		# Update line position to follow item
-		$Line3D.global_position = global_position
+		var line_node = $Line3D
 		
-		# Draw thicker line using triangles instead of primitive lines
+		# Update line position to follow item
+		line_node.global_position = global_position
+		
+		# Reset rotation to identity so line doesn't rotate with object
+		line_node.global_rotation = Vector3.ZERO
+		
+		# Draw thicker line using triangles - now in global space
 		var start = Vector3.ZERO
-		var end = to_local(mouse_world_position)
+		var end = mouse_world_position - global_position
 		var thickness = 0.03
 		
 		# Calculate perpendicular vector for thickness

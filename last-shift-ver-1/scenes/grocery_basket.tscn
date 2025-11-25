@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://bawe2n6bmgohk"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_base"]
+size = Vector3(1.2, 0.1, 0.9)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_efrvw"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.39215687)
+
+[sub_resource type="BoxMesh" id="BoxMesh_side"]
+size = Vector3(0.08, 0.6, 0.9)
+
+[sub_resource type="BoxMesh" id="BoxMesh_front_back"]
+size = Vector3(1.2, 0.6, 0.08)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_base"]
+size = Vector3(1.2, 0.1, 0.9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_walls"]
+size = Vector3(0.08, 0.6, 0.9)
+
+[node name="GroceryBasket" type="StaticBody3D"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="BasketMesh" type="Node3D" parent="."]
+
+[node name="Base" type="MeshInstance3D" parent="BasketMesh"]
+mesh = SubResource("BoxMesh_base")
+surface_material_override/0 = SubResource("StandardMaterial3D_efrvw")
+
+[node name="LeftSide" type="MeshInstance3D" parent="BasketMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56, 0.35, 0)
+mesh = SubResource("BoxMesh_side")
+surface_material_override/0 = SubResource("StandardMaterial3D_efrvw")
+
+[node name="RightSide" type="MeshInstance3D" parent="BasketMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.56, 0.35, 0)
+mesh = SubResource("BoxMesh_side")
+surface_material_override/0 = SubResource("StandardMaterial3D_efrvw")
+
+[node name="FrontSide" type="MeshInstance3D" parent="BasketMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0.41)
+mesh = SubResource("BoxMesh_front_back")
+surface_material_override/0 = SubResource("StandardMaterial3D_efrvw")
+
+[node name="BackSide" type="MeshInstance3D" parent="BasketMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, -0.41)
+mesh = SubResource("BoxMesh_front_back")
+surface_material_override/0 = SubResource("StandardMaterial3D_efrvw")
+
+[node name="BaseCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_base")
+
+[node name="LeftWallCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56, 0.35, 0)
+shape = SubResource("BoxShape3D_walls")
+
+[node name="RightWallCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.56, 0.35, 0)
+shape = SubResource("BoxShape3D_walls")
+
+[node name="FrontWallCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.35, 0.41)
+shape = SubResource("BoxShape3D_walls")
+
+[node name="BackWallCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.35, -0.41)
+shape = SubResource("BoxShape3D_walls")
