@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b37rqy2bud8bo"]
+
+[ext_resource type="Script" uid="uid://vam6tfhyyaj4" path="res://scripts/grocery_spawner.gd" id="1_spawner"]
+[ext_resource type="PackedScene" uid="uid://dga6olju0chdd" path="res://scenes/grocery_item.tscn" id="2_ns6u7"]
+
+[node name="GrocerySpawner" type="Node3D"]
+script = ExtResource("1_spawner")
+grocery_item_scene = ExtResource("2_ns6u7")

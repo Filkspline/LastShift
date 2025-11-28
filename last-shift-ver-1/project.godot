@@ -18,3 +18,10 @@ config/icon="res://icon.svg"
 [autoload]
 
 Pixelator="*res://scripts/autoload/pixelator.gd"
+
+[physics]
+
+common/physics_ticks_per_second=240
+common/max_physics_steps_per_frame=12
+3d/default_gravity=9.799999999999997
+common/physics_interpolation=true

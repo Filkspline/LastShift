@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://bc22y101xrsjl" path="res://scripts/grocery_item.gd" id="1_tyffc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1"]
-size = Vector3(0.5, 0.5, 0.5)
+size = Vector3(0.3020563, 0.31020737, 0.35009766)
 
 [sub_resource type="BoxMesh" id="BoxMesh_1"]
-size = Vector3(0.5, 0.5, 0.5)
+size = Vector3(0.3, 0.3, 0.3)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
 albedo_color = Color(0.8, 0.4, 0.2, 1)
@@ -19,11 +19,14 @@ axis_lock_linear_z = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 mass = 0.5
-gravity_scale = 2.0
+gravity_scale = 0.1
 freeze_mode = 1
+continuous_cd = true
+contact_monitor = true
 script = ExtResource("1_tyffc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0029816628, 0.0034542084, 0.07495117)
 shape = SubResource("BoxShape3D_1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

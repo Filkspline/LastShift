@@ -38,6 +38,12 @@ func _ready():
 	# Set center of mass slightly lower for better tipping physics
 	center_of_mass_mode = RigidBody3D.CENTER_OF_MASS_MODE_CUSTOM
 	center_of_mass = Vector3(0, -0.1, 0)  # Slightly below center
+	
+	# CRITICAL: Ensure continuous collision detection is enabled
+	continuous_cd = true
+	
+	# Increase max contacts for better collision detection
+	max_contacts_reported = 4
 
 func setup_line():
 	var line_node = $Line3D
@@ -94,9 +100,19 @@ func start_drag():
 
 func stop_drag():
 	is_dragging = false
-	gravity_scale = 2.0
-	linear_damp = damping  # Back to normal damping
-	angular_damp = rotation_damping  # Back to normal rotation damping
+	# FIXED: Use much lower gravity to prevent tunneling
+	gravity_scale = 0.5  # Was 2.0 - now much slower falling
+	
+	# FIXED: Add more damping when released to slow it down
+	linear_damp = 1.5  # Increased from damping value
+	angular_damp = 2.0  # Increased rotation damping
+	
+	# FIXED: Clamp the velocity on release to prevent it from being too fast
+	var current_linear_vel = linear_velocity
+	var max_release_speed = 3.0
+	if current_linear_vel.length() > max_release_speed:
+		linear_velocity = current_linear_vel.normalized() * max_release_speed
+	
 	print("Stopped dragging item")
 
 func _physics_process(delta):
@@ -126,6 +142,11 @@ func _physics_process(delta):
 		
 		# Update line color based on speed
 		update_line_color()
+	else:
+		# FIXED: When not dragging, clamp velocity to prevent tunneling
+		var max_falling_speed = 5.0
+		if linear_velocity.length() > max_falling_speed:
+			linear_velocity = linear_velocity.normalized() * max_falling_speed
 	
 	# Draw line
 	draw_line()
@@ -197,6 +218,6 @@ func break_line():
 	print("Line broke! Speed: ", current_velocity)
 	stop_drag()
 	
-	# Add a little impulse away from mouse
+	# FIXED: Reduce impulse strength to prevent tunneling
 	var direction = (global_position - mouse_world_position).normalized()
-	apply_central_impulse(direction * 2.0)
+	apply_central_impulse(direction * 1.0)  # Reduced from 2.0
