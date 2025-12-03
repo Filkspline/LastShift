@@ -191,7 +191,7 @@ func draw_line():
 		# Reset rotation to identity so line doesn't rotate with object
 		line_node.global_rotation = Vector3.ZERO
 		
-		# Draw thicker line using triangles - now in global space
+		# Draw line with rounded caps
 		var start = Vector3.ZERO
 		var end = mouse_world_position - global_position
 		var thickness = 0.03
@@ -202,22 +202,41 @@ func draw_line():
 		
 		line_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 		
-		# First triangle
+		# Main line body
 		line_mesh.surface_add_vertex(start + perpendicular)
 		line_mesh.surface_add_vertex(start - perpendicular)
 		line_mesh.surface_add_vertex(end + perpendicular)
 		
-		# Second triangle
 		line_mesh.surface_add_vertex(end + perpendicular)
 		line_mesh.surface_add_vertex(start - perpendicular)
 		line_mesh.surface_add_vertex(end - perpendicular)
 		
+		# Add rounded caps
+		draw_circle_cap(start, perpendicular, 8)
+		draw_circle_cap(end, perpendicular, 8)
+		
 		line_mesh.surface_end()
 
+func draw_circle_cap(center: Vector3, perpendicular: Vector3, segments: int):
+	"""Draw a circular cap at the end of the line"""
+	var radius = perpendicular.length()
+	var angle_step = PI * 2.0 / segments
+	
+	for i in range(segments):
+		var angle1 = i * angle_step
+		var angle2 = (i + 1) * angle_step
+		
+		var point1 = center + Vector3(cos(angle1), sin(angle1), 0) * radius
+		var point2 = center + Vector3(cos(angle2), sin(angle2), 0) * radius
+		
+		# Create triangle fan from center
+		line_mesh.surface_add_vertex(center)
+		line_mesh.surface_add_vertex(point1)
+		line_mesh.surface_add_vertex(point2)
 func break_line():
 	print("Line broke! Speed: ", current_velocity)
 	stop_drag()
 	
 	# FIXED: Reduce impulse strength to prevent tunneling
-	var direction = (global_position - mouse_world_position).normalized()
-	apply_central_impulse(direction * 1.0)  # Reduced from 2.0
+	#var direction = (global_position - mouse_world_position).normalized()
+	#apply_central_impulse(direction * 1.0)  # Reduced from 2.0

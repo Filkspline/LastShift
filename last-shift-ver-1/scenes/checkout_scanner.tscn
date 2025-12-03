@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhexdqdgmwhcm"]
+
+[ext_resource type="Script" uid="uid://b4e7vjxmpe4cp" path="res://scripts/checkout_scanner.gd" id="1_scanner"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_scanner"]
+size = Vector3(0.5, 0.3, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_scanner"]
+albedo_color = Color(0.2, 0.2, 0.2, 1)
+metallic = 0.6
+roughness = 0.4
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_scanner"]
+size = Vector3(0.5, 0.3, 0.8)
+
+[node name="CheckoutScanner" type="Node3D"]
+
+[node name="ScannerMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_scanner")
+surface_material_override/0 = SubResource("StandardMaterial3D_scanner")
+
+[node name="ScanArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_scanner")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ScanArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("BoxShape3D_scanner")
+
+[connection signal="body_entered" from="ScanArea" to="ScanArea" method="_on_body_entered"]
