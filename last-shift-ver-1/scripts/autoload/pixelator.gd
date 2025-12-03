@@ -1,6 +1,8 @@
 extends CanvasLayer
 
 @export var pixel_size: float = 3.0
+@export var range_per_color: int = 8  # Color quantization range (2-32)
+@export var enable_color_quantization: bool = true  # Toggle color reduction on/off
 
 var color_rect: ColorRect
 var shader_material: ShaderMaterial
@@ -25,6 +27,8 @@ func _ready() -> void:
 	shader_material = ShaderMaterial.new()
 	shader_material.shader = shader
 	shader_material.set_shader_parameter("pixel_size", pixel_size)
+	shader_material.set_shader_parameter("range_per_color", range_per_color)
+	shader_material.set_shader_parameter("enable_color_quantization", enable_color_quantization)
 	
 	# Get actual screen size
 	var viewport_size = get_viewport().get_visible_rect().size
@@ -39,6 +43,16 @@ func set_pixel_size(size: float) -> void:
 	pixel_size = size
 	if shader_material:
 		shader_material.set_shader_parameter("pixel_size", pixel_size)
+
+func set_range_per_color(range: int) -> void:
+	range_per_color = clamp(range, 2, 32)
+	if shader_material:
+		shader_material.set_shader_parameter("range_per_color", range_per_color)
+
+func set_color_quantization(enabled: bool) -> void:
+	enable_color_quantization = enabled
+	if shader_material:
+		shader_material.set_shader_parameter("enable_color_quantization", enabled)
 
 func _notification(what: int) -> void:
 	# Update screen size on viewport resize
