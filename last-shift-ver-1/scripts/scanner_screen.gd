@@ -7,17 +7,13 @@ var viewport: SubViewport
 var display_mesh: MeshInstance3D
 
 func _ready():
-	# Get references to UI elements - note SubViewport is now under CanvasLayer
-	viewport = $CanvasLayer/SubViewport
-	item_list = $CanvasLayer/SubViewport/ScreenUI/MarginContainer/VBoxContainer/ItemList
-	total_price_label = $CanvasLayer/SubViewport/ScreenUI/MarginContainer/VBoxContainer/TotalContainer/TotalPrice
+	# Get references to UI elements
+	viewport = $SubViewport
+	item_list = $SubViewport/ScreenUI/MarginContainer/VBoxContainer/ItemList
+	total_price_label = $SubViewport/ScreenUI/MarginContainer/VBoxContainer/TotalContainer/TotalPrice
 	display_mesh = $DisplayScreen
 	
-	# Set CanvasLayer to high layer so it's not affected by pixelation shader
-	var canvas_layer = $CanvasLayer
-	canvas_layer.layer = 100
-	
-	# Make sure viewport renders with sharp text (no pixelation)
+	# Make sure viewport renders continuously
 	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	
 	# Create viewport texture and apply it to the display mesh

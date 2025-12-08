@@ -2,7 +2,7 @@
 shader_type canvas_item;
 
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_nearest;
-uniform float pixel_size : hint_range(1.0, 16.0) = 3.0;
+uniform float pixel_size : hint_range(1.0, 16.0) = 2.0;
 uniform vec2 screen_size = vec2(1152.0, 648.0);
 uniform int range_per_color : hint_range(2, 32) = 8;
 uniform bool enable_color_quantization = true;

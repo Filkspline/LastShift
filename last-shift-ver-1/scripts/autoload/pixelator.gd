@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@export var pixel_size: float = 3.0
+@export var pixel_size: float = 2.0
 @export var range_per_color: int = 8
 @export var enable_color_quantization: bool = true
 

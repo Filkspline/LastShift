@@ -65,6 +65,7 @@ shape = SubResource("BoxShape3D_1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 
 [node name="CapsuleMesh" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.27823472)
 mesh = SubResource("CapsuleMesh_1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
@@ -72,7 +73,7 @@ shape = SubResource("CapsuleShape3D_1")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-fov = 80.0
+fov = 100.0
 script = ExtResource("1_camera")
 
 [node name="Phone" parent="." instance=ExtResource("2_u7vp4")]
@@ -92,4 +93,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8009067, 2.6468534, -1.411
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.879503, -1.438007)
 
 [node name="ScannerScreen" parent="." instance=ExtResource("7_e70go")]
-transform = Transform3D(0.8548666, 0, -0.51884794, 0, 1, 0, 0.51884794, 0, 0.8548666, 0.5636153, 1.5901054, -0.49430025)
+transform = Transform3D(1.2924367, 0, -0.47628507, 0, 1.4922825, 0, 0.7844242, 0, 0.78473896, 0.8887886, 1.5901054, -1.9219484)
