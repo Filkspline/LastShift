@@ -1,0 +1,107 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcjuceamxttem"]
+
+[ext_resource type="Script" uid="uid://oaedllgqqpkg" path="res://scripts/scanner_screen.gd" id="1_screen"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_screen"]
+size = Vector3(0.6, 0.4, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_screen"]
+albedo_color = Color(0.1, 0.1, 0.1, 1)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="QuadMesh" id="QuadMesh_display"]
+size = Vector2(0.55, 0.35)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_display"]
+albedo_color = Color(0.05, 0.15, 0.05, 1)
+emission_enabled = true
+emission = Color(0.1, 0.3, 0.1, 1)
+emission_energy_multiplier = 0.5
+
+[node name="ScannerScreen" type="Node3D"]
+script = ExtResource("1_screen")
+
+[node name="ScreenFrame" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_screen")
+surface_material_override/0 = SubResource("StandardMaterial3D_screen")
+
+[node name="DisplayScreen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.026)
+mesh = SubResource("QuadMesh_display")
+surface_material_override/0 = SubResource("StandardMaterial3D_display")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer"]
+transparent_bg = true
+size = Vector2i(550, 350)
+
+[node name="ScreenUI" type="Control" parent="CanvasLayer/SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="CanvasLayer/SubViewport/ScreenUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.15, 0.05, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/SubViewport/ScreenUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/SubViewport/ScreenUI/MarginContainer"]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="CanvasLayer/SubViewport/ScreenUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 1, 0.2, 1)
+theme_override_font_sizes/font_size = 24
+text = "CHECKOUT SCANNER"
+horizontal_alignment = 1
+
+[node name="Separator" type="HSeparator" parent="CanvasLayer/SubViewport/ScreenUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ItemList" type="VBoxContainer" parent="CanvasLayer/SubViewport/ScreenUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/SubViewport/ScreenUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TotalContainer" type="HBoxContainer" parent="CanvasLayer/SubViewport/ScreenUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TotalLabel" type="Label" parent="CanvasLayer/SubViewport/ScreenUI/MarginContainer/VBoxContainer/TotalContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.2, 1, 0.2, 1)
+theme_override_font_sizes/font_size = 20
+text = "TOTAL:"
+
+[node name="TotalPrice" type="Label" parent="CanvasLayer/SubViewport/ScreenUI/MarginContainer/VBoxContainer/TotalContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 1, 0.2, 1)
+theme_override_font_sizes/font_size = 20
+text = "$0.00"
+horizontal_alignment = 2
