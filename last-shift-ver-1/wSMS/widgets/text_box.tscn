@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnsj05jug3i8"]
+
+[ext_resource type="Script" uid="uid://d01y5830woxhn" path="res://wSMS/widgets/text_box.gd" id="1_phwpq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7ve7"]
+bg_color = Color(0.568627, 0.568627, 0.568627, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[node name="TextBox" type="Control"]
+custom_minimum_size = Vector2(240, 23)
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -120.0
+offset_right = 120.0
+offset_bottom = 23.0
+grow_horizontal = 2
+script = ExtResource("1_phwpq")
+you_colour = Color(0.568627, 0.568627, 0.568627, 1)
+me_colour = Color(0.400226, 0.576848, 0.819473, 1)
+
+[node name="Tail" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -13.0
+offset_top = 14.0
+offset_right = 118.0
+offset_bottom = 87.0
+
+[node name="TailMe" type="ColorRect" parent="Tail"]
+layout_mode = 0
+offset_left = 256.0
+offset_top = -12.0
+offset_right = 268.0
+offset_bottom = 1.52588e-05
+rotation = 0.785398
+color = Color(0.568627, 0.568627, 0.568627, 1)
+
+[node name="TailYou" type="ColorRect" parent="Tail"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = -12.0
+offset_right = 23.0
+rotation = 0.785398
+color = Color(0.568627, 0.568627, 0.568627, 1)
+
+[node name="Box" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(240, 23)
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 23.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_k7ve7")
+
+[node name="Label" type="RichTextLabel" parent="Box"]
+layout_mode = 2
+text = "efrvedrg"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0

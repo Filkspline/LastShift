@@ -11,6 +11,8 @@ var center_scale: Vector2 = Vector2(1.0, 1.0)
 
 var tween: Tween
 
+@onready var messages: MessageQueue = $PhoneBody/Screen/ScreenContent/Messages
+
 func _ready():
 	# Calculate positions
 	var viewport_size = get_viewport_rect().size
@@ -28,6 +30,8 @@ func _ready():
 	button.pressed.connect(_on_phone_clicked)
 	
 	print("Phone initialized at: ", position)
+	messages.move_offset()
+	messages.run_test()
 
 func _on_phone_clicked():
 	if is_expanded:

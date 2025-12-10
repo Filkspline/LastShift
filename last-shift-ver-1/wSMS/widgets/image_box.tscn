@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv03hm7tsnwe0"]
+
+[ext_resource type="Script" uid="uid://be6gew6wl5gbm" path="res://wSMS/widgets/image_box.gd" id="1_fhbbg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uc8ut"]
+
+[node name="ImageBox" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_fhbbg")
+
+[node name="Tail" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -13.0
+offset_top = 14.0
+offset_right = 55.0
+offset_bottom = 87.0
+
+[node name="TailMe" type="ColorRect" parent="Tail"]
+layout_mode = 2
+offset_left = 282.0
+offset_top = -11.0
+offset_right = 298.0
+offset_bottom = 6.0
+rotation = 0.809833
+color = Color(0.568627, 0.568627, 0.568627, 1)
+
+[node name="TailYou" type="ColorRect" parent="Tail"]
+layout_mode = 2
+offset_right = 16.0
+offset_bottom = 17.0
+rotation = -0.809833
+color = Color(0.568627, 0.568627, 0.568627, 1)
+
+[node name="Box" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(267, 0)
+layout_mode = 0
+offset_right = 267.0
+offset_bottom = 69.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_uc8ut")
+
+[node name="Label" type="RichTextLabel" parent="Box"]
+layout_mode = 2
+fit_content = true
+scroll_active = false

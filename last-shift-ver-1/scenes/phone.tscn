@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqht8mqfh4ojg"]
+[gd_scene load_steps=5 format=3 uid="uid://cqht8mqfh4ojg"]
 
 [ext_resource type="Script" uid="uid://da7dful0383n0" path="res://scripts/phone.gd" id="1_08mii"]
+[ext_resource type="PackedScene" uid="uid://b41eclpfyicld" path="res://wSMS/message_queue.tscn" id="2_ewalk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1"]
 bg_color = Color(0.15, 0.15, 0.2, 1)
@@ -39,6 +40,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_1")
 
 [node name="Screen" type="Panel" parent="PhoneBody"]
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -73,6 +75,12 @@ layout_mode = 2
 text = "Click to expand
 Click again to close"
 horizontal_alignment = 1
+
+[node name="Messages" parent="PhoneBody/Screen/ScreenContent" instance=ExtResource("2_ewalk")]
+layout_mode = 2
+char_width_of_box = 12
+slide_to_the_right = -70.0
+offset = Vector2(-80, -30)
 
 [node name="Notch" type="Panel" parent="PhoneBody"]
 layout_mode = 0
