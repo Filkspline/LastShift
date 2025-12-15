@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dlv8elkpu8sdj"]
+[gd_scene load_steps=15 format=3 uid="uid://dlv8elkpu8sdj"]
 
 [ext_resource type="Script" uid="uid://rk66aj3cs77e" path="res://scripts/camera_look.gd" id="1_camera"]
 [ext_resource type="PackedScene" uid="uid://cqht8mqfh4ojg" path="res://scenes/phone.tscn" id="2_u7vp4"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b37rqy2bud8bo" path="res://scenes/grocery_spawner.tscn" id="5_41ujk"]
 [ext_resource type="PackedScene" uid="uid://bhexdqdgmwhcm" path="res://scenes/checkout_scanner.tscn" id="6_hbebi"]
 [ext_resource type="PackedScene" uid="uid://dcjuceamxttem" path="res://scenes/scanner_screen.tscn" id="7_e70go"]
+[ext_resource type="PackedScene" uid="uid://xjr0nh2sc80d" path="res://scenes/customer.tscn" id="8_82itb"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1"]
 size = Vector2(20, 20)
@@ -73,7 +74,7 @@ shape = SubResource("CapsuleShape3D_1")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-fov = 100.0
+fov = 80.0
 script = ExtResource("1_camera")
 
 [node name="Phone" parent="." instance=ExtResource("2_u7vp4")]
@@ -93,4 +94,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8009067, 2.6468534, -1.411
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.879503, -1.438007)
 
 [node name="ScannerScreen" parent="." instance=ExtResource("7_e70go")]
-transform = Transform3D(1.2924367, 0, -0.47628507, 0, 1.4922825, 0, 0.7844242, 0, 0.78473896, 0.8887886, 1.5901054, -1.9219484)
+transform = Transform3D(1.2924367, 0, -0.47628507, 0, 1.4922825, 0, 0.7844242, 0, 0.78473896, 0.8887886, 1.5901054, -0.7432232)
+
+[node name="CustomerPath" parent="." instance=ExtResource("8_82itb")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2, 1, -4)
