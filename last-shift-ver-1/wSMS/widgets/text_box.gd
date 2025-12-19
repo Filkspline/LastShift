@@ -39,14 +39,28 @@ func format_text(text: String)->String:
 	if text.length()<max_chars: return text
 	
 	var splitted_truly: PackedStringArray = text.split(" ")
-	var counter: int = splitted_truly[0].length()
+	var counter: int = 0; 
+	var i: int = -1
+	var last_idx: int = splitted_truly.size() - 1
 	
+	# Word splitter
 	var word: String
-	for i: int in range(1, splitted_truly.size()):
-		#print(counter)
-		#print(str(splitted_truly)+" "+str(counter))
+	while i < last_idx:
+		i+=1
 		word = splitted_truly[i]
-		if counter + word.length() >= max_chars:
+		# Word too long, split into pieces and leave room for recurse
+		if word.length() >= max_chars:
+			var left_str: String = word.left(max_chars-counter)
+			var remainder: int = word.length()-(max_chars-counter)
+			var right_str: String = word.right(remainder)
+			splitted_truly[i] = left_str
+			splitted_truly.insert(i+1, "\n"+right_str)
+			last_idx += 1
+			counter = 0
+			continue
+		
+		# Word overflow
+		if counter + word.length() >= max_chars or word == "\n":
 			splitted_truly.insert(i, "\n")
 			counter = 0
 			continue

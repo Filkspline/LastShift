@@ -65,7 +65,7 @@ dwefgrth
 {%choice="nuggets"
 #endchoice
 
-#goto start
+abcdefghijklmnopqrstuvqxyzabcdefghijklmnop
 
 #endscene
 
