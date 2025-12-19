@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://xjr0nh2sc80d"]
+
+[ext_resource type="Script" uid="uid://cf8c62s82kock" path="res://scripts/ai_customer.gd" id="1_customer"]
+
+[sub_resource type="Curve3D" id="Curve3D_path"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 5, 0, 5, 0, 0, 0, 0, 0, 0, 5, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_customer"]
+radius = 0.3
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape_customer"]
+radius = 0.3
+height = 1.8
+
+[node name="CustomerPath" type="Path3D"]
+curve = SubResource("Curve3D_path")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+rotation_mode = 1
+
+[node name="AICustomer" type="CharacterBody3D" parent="PathFollow3D"]
+script = ExtResource("1_customer")
+
+[node name="Body" type="MeshInstance3D" parent="PathFollow3D/AICustomer"]
+mesh = SubResource("CapsuleMesh_customer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PathFollow3D/AICustomer"]
+shape = SubResource("CapsuleShape_customer")
