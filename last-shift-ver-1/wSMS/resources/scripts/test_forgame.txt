@@ -1,0 +1,96 @@
+#scene start##
+{%var=homie}
+{%icount=0
+{%icount++ == 1}
+what's up my %var
+&what is up %icount
+:meowl_tiny.png
+#goto followup
+#endscene
+
+#scene helpme##
+a
+
+b
+c
+d
+#endscene
+
+#scene gofile##
+{%bar=femur}
+1st file
+#gofile othertestdoc.txt #to gofile
+#endscene
+
+#scene followup##
+you died %icount
+&oh noooo {%icount=23} %icount
+%icount
+#goto ifscene
+#endscene
+
+#scene iftest##
+{%count=1}
+{%beepus = bongos}
+#if {%count == 2}
+	if passed
+#elif {%count == 1}
+	#if { %beepus == bongos }
+		nested if passed
+	#endif
+	#if { %beepus == bingus }
+		the bingle bus is coming or something
+	#else
+		&death is coming for you
+	#endif
+	elif passed
+#else
+	if failed
+#endif
+#endscene
+
+#scene choicescene##
+{ %choice="" }
+what do you want from mcdonalds
+
+#choice
+-> cheesburgr
+{%choice="cheeseburger"
+dwefgrth
+5r
+4e4
+-> hamburger
+{%choice="hamburger"
+-> 20 chicken nugget
+{%choice="nuggets"
+#endchoice
+
+abcdefghijklmnopqrstuvqxyzabcdefghijklmnop
+
+#endscene
+
+#scene ifscene##
+#if { 1 == 1 }
+	you passed
+#else
+	passed the test to give me more spells!
+#endelse
+
+#if { %var == homie }
+riz gukgak
+&don't you recognise me?
+#endif
+
+#if { 2 > 1 }
+	hi
+	#if { 3 > 2 }
+		&hello
+	#endif
+#endif
+
+#if { 1 == 2 }
+	hi
+#elif { 1 == 1 }
+	booyah
+#endif
+#endscene

@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bseme7yri5afk"]
+
+[ext_resource type="Script" uid="uid://6p51040vlrp3" path="res://wSMS/widgets/choice_select.gd" id="1_o6ycb"]
+[ext_resource type="PackedScene" uid="uid://cniwpj1wojlxa" path="res://wSMS/widgets/choice_button.tscn" id="2_xs3kr"]
+
+[node name="ChoiceSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+script = ExtResource("1_o6ycb")
+choice_button_scene = ExtResource("2_xs3kr")
+
+[node name="Container" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(240, 23)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -23.0
+offset_right = 260.0
+grow_vertical = 0
+theme_override_constants/separation = 15

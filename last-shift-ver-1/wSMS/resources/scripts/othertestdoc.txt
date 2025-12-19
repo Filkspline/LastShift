@@ -1,0 +1,19 @@
+#scene gofile##
+2nd file
+I will break your %bar
+#endscene
+
+#scene wraptest##
+don't you recognise me?
+&don't you recognise me?
+#endscene
+
+#scene choicetest##
+hello
+&hello
+#choice
+-> aefgrthyj
+-> bujygbfv
+-> cxcvbcgnmj,h
+#endchoice
+#endscene
