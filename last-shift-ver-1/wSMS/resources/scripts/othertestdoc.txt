@@ -7,3 +7,13 @@ I will break your %bar
 don't you recognise me?
 &don't you recognise me?
 #endscene
+
+#scene choicetest##
+hello
+&hello
+#choice
+-> aefgrthyj
+-> bujygbfv
+-> cxcvbcgnmj,h
+#endchoice
+#endscene

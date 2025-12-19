@@ -45,4 +45,4 @@ anchor_top = 0.0
 anchor_bottom = 0.0
 grow_vertical = 1
 
-[connection signal="play_from" from="Scenes" to="." method="_play_scene_from_name"]
+[connection signal="play_from" from="Scenes" to="." method="_play_scene"]

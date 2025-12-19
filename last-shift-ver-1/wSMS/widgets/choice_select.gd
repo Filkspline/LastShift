@@ -17,10 +17,10 @@ var choice_amnt: int = 0
 ## Parse a script line, editing the structure
 func parse_line(text: String):
 	if text.begins_with("->"):
-		var name = text.trim_prefix("-> ")
+		var n = text.trim_prefix("-> ")
 		var idx = choices.size()
-		choices[idx] = PackedStringArray(["&"+name])
-		_add_choice(name)
+		choices[idx] = PackedStringArray(["&"+n])
+		_add_choice(n)
 	else:
 		choices[choices.size()-1].append(text)
 
@@ -33,7 +33,7 @@ func _add_choice(text: String):
 	choice.connect("clicked", _option_selected)
 	$Container.add_child(choice)
 	choice.force_resize()
-	choice.slide(slide_amnt)
+	choice.slide(slide_amnt-20)
 	$Container.hide(); $Container.show()
 
 ## When an option is selected, send up the instructions and clear all boxes

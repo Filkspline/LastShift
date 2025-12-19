@@ -27,6 +27,8 @@ extends Control
 
 var message_queue: Array[TextBox]
 var if_stack: Array[bool] = []
+## Player chooicebox has now appeared
+signal started_choosing
 ## Player has selected a choicebox
 signal done_choosing
 ## A scene has finished playing, includes recursive calls from choice boxes etc
@@ -44,20 +46,19 @@ func _ready():
 	$ChoiceSelect.slide(slide_to_the_right)
 	$VBox.size = size
 	$VBox.position += Vector2(20, -$VBox.get_theme_constant("separation")*6)
-	#run_test()
 	choice_box_y = $VBox.position.y+(5)*$VBox.get_theme_constant("separation")
 	TextBox.max_chars = char_width_of_box
 
 ## Load a file (starts from script directory)
-func load_file(name: String):
+func load_file(file_name: String):
 	#$Variables.clear()
-	var n: String = script_directory+name
+	var n: String = script_directory+file_name
 	$Scenes.load_file(n)
 
 ## Move over to the given offset position
 func move_offset(): 
 	$VBox.position += offset
-	$ChoiceSelect.position += offset
+	choice_box_y = $VBox.position.y+(5)*$VBox.get_theme_constant("separation")
 
 ###########
 # Testing #
@@ -65,8 +66,8 @@ func move_offset():
 
 ## Load the test script
 func run_test(): 
-	load_file("test_forgame.txt")
-	await play_from_scene("start")
+	load_file("othertestdoc.txt")
+	await play_from_scene("choicetest")
 
 ## Blocking function for playing from a set starting point at a scene
 func play_from_scene(scene_name: String): 
@@ -124,11 +125,9 @@ func add_multi(lots: Array[String]):
 		await get_tree().create_timer(time_between_messages/2.0).timeout
 	done_scene.emit()
 
-func _play_scene(lines: PackedStringArray):
+## Play a named scene stored in the scenes sub-node, emits a named signal on completion
+func _play_scene(lines: PackedStringArray, scene_name: String):
 	await add_multi(lines)
-
-func _play_scene_from_name(lines: PackedStringArray, scene_name: String):
-	await _play_scene(lines)
 	done_named_scene.emit(scene_name)
 
 ## Go to a file or another scene, starts from script directory
@@ -142,9 +141,9 @@ func goto(scene_name: String):
 func _parse_goto_function(cmd: String):
 	# Go scene
 	if cmd.begins_with("#goto"):
-		var i = cmd.trim_prefix("#goto ")
-		started_scene.emit(i)
-		$Scenes.play_scene(i)
+		var j = cmd.trim_prefix("#goto ")
+		started_scene.emit(j)
+		$Scenes.play_scene(j)
 		return
 	
 	# Go file
@@ -208,6 +207,7 @@ func _parse_choice(text: String):
 		"#endchoice":
 			choice_box.position.y = choice_box_y-(3-choice_box.choice_amnt)*$VBox.get_theme_constant("separation")
 			# Wait for response
+			started_choosing.emit()
 			var lines: PackedStringArray = await choice_box.add_to_stack
 			choice_box.hide()
 			await _run_subset(lines)
