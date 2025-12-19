@@ -59,7 +59,7 @@ what do you want from mcdonalds
 dwefgrth
 5r
 4e4
--> hamburger erwejkfhewjf weriwejr eerer er
+-> hamburger
 {%choice="hamburger"
 -> 20 chicken nugget
 {%choice="nuggets"

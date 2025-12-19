@@ -66,8 +66,8 @@ func move_offset():
 
 ## Load the test script
 func run_test(): 
-	load_file("othertestdoc.txt")
-	await play_from_scene("choicetest")
+	load_file("test_forgame.txt")
+	await play_from_scene("choicescene")
 
 ## Blocking function for playing from a set starting point at a scene
 func play_from_scene(scene_name: String): 
