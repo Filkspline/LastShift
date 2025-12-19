@@ -33,6 +33,9 @@ func _ready():
 	messages.move_offset()
 	messages.run_test()
 
+func _reduce_click_area(): $ClickArea.size.y = 250
+func _increase_cliick_area(): $ClickArea.size.y = 500
+
 func _on_phone_clicked():
 	if is_expanded:
 		collapse()

@@ -66,6 +66,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Title" type="Label" parent="PhoneBody/Screen/ScreenContent"]
+visible = false
 layout_mode = 2
 text = "Phone"
 horizontal_alignment = 1

@@ -29,8 +29,10 @@ var message_queue: Array[TextBox]
 var if_stack: Array[bool] = []
 ## Player has selected a choicebox
 signal done_choosing
-## A scene has finished being played
+## A scene has finished playing, includes recursive calls from choice boxes etc
 signal done_scene
+## A played scene has finished playing, returns the given name
+signal done_named_scene(scene_name: String)
 ## A scene has started playing, sends out the scene's name
 signal started_scene(name: String)
 
@@ -67,10 +69,9 @@ func run_test():
 	await play_from_scene("start")
 
 ## Blocking function for playing from a set starting point at a scene
-func play_from_scene(name: String): 
-	goto(name)
+func play_from_scene(scene_name: String): 
+	goto(scene_name)
 	#await done_scene
-	#goto(name)
 
 ################
 # Initialisers #
@@ -126,13 +127,17 @@ func add_multi(lots: Array[String]):
 func _play_scene(lines: PackedStringArray):
 	await add_multi(lines)
 
+func _play_scene_from_name(lines: PackedStringArray, scene_name: String):
+	await _play_scene(lines)
+	done_named_scene.emit(scene_name)
+
 ## Go to a file or another scene, starts from script directory
-func goto(name: String):
-	if name.begins_with("#"):
-		await _parse_goto_function(name)
+func goto(scene_name: String):
+	if scene_name.begins_with("#"):
+		await _parse_goto_function(scene_name)
 	else:
-		started_scene.emit(name)
-		await $Scenes.play_scene(name)
+		started_scene.emit(scene_name)
+		await $Scenes.play_scene(scene_name)
 
 func _parse_goto_function(cmd: String):
 	# Go scene
@@ -232,7 +237,7 @@ func new_message(text: String, is_you: bool):
 	new_text.max_chars = char_width_of_box
 	# Slide over if needed
 	if !is_you:
-		new_text.slide(slide_to_the_right)
+		new_text.slide(int(slide_to_the_right))
 	add_to_queue(new_text)
 
 ## Add an image message, always belongs to other
