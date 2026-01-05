@@ -1,18 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://dsfqmkxk5jy07"]
+[gd_scene load_steps=5 format=3 uid="uid://dsfqmkxk5jy07"]
 
-[ext_resource type="Script" uid="uid://ce06niwnpb8ue" path="res://wSMS/message_queue.gd" id="1_xi8u0"]
+[ext_resource type="Script" uid="uid://fcnit0n34b17" path="res://wSMS/rpg_message_display.gd" id="1_wroxi"]
+[ext_resource type="PackedScene" uid="uid://b8j65ecv303q1" path="res://wSMS/widgets/rpg_style/rpg_text_box.tscn" id="2_1efgo"]
+[ext_resource type="PackedScene" uid="uid://b41eclpfyicld" path="res://wSMS/message_queue.tscn" id="2_qt6ip"]
+[ext_resource type="PackedScene" uid="uid://dfd8djcmukikj" path="res://wSMS/widgets/rpg_style/rpg_choice_button.tscn" id="4_13jf6"]
 
 [node name="RpgMessageDisplay" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_wroxi")
 
-[node name="MessageQueue" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("1_xi8u0")
-metadata/_custom_type_script = "uid://ce06niwnpb8ue"
+[node name="MessageQueue" parent="." instance=ExtResource("2_qt6ip")]
+layout_mode = 1
+offset_left = -364.0
+offset_top = 26.0
+offset_right = -364.0
+offset_bottom = 26.0
+text_scene = ExtResource("2_1efgo")
+choice_button_scene = ExtResource("4_13jf6")
+cap_max_messages = true
+time_between_messages = 4.0
+choices_offset = Vector2(200, 70)

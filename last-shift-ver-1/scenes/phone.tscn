@@ -85,6 +85,7 @@ layout_mode = 2
 char_width_of_box = 12
 slide_to_the_right = -60.0
 offset = Vector2(-80, -30)
+choices_offset = Vector2(-85, 0)
 
 [node name="Notch" type="Panel" parent="PhoneBody"]
 layout_mode = 0
