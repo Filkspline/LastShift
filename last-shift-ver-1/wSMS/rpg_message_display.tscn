@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsfqmkxk5jy07"]
+
+[ext_resource type="Script" uid="uid://ce06niwnpb8ue" path="res://wSMS/message_queue.gd" id="1_xi8u0"]
+
+[node name="RpgMessageDisplay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MessageQueue" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_xi8u0")
+metadata/_custom_type_script = "uid://ce06niwnpb8ue"

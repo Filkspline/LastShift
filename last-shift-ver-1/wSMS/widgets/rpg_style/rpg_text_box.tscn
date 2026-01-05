@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8j65ecv303q1"]
+
+[ext_resource type="Script" uid="uid://63fkaub26vn7" path="res://wSMS/widgets/rpg_style/rpg_text_box.gd" id="1_welc3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oujpd"]
+content_margin_left = 8.0
+content_margin_top = 2.0
+content_margin_right = 8.0
+content_margin_bottom = 2.0
+bg_color = Color(0.11858138, 0.11858139, 0.11858132, 1)
+
+[node name="RpgTextBox" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -120.0
+offset_right = 120.0
+offset_bottom = 23.0
+grow_horizontal = 2
+script = ExtResource("1_welc3")
+
+[node name="Box" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(240, 23)
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 23.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_oujpd")
+
+[node name="Label" type="RichTextLabel" parent="Box"]
+layout_mode = 2
+text = "efrvedrg"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0

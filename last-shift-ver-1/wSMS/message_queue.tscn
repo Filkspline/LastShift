@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://b41eclpfyicld"]
+[gd_scene load_steps=8 format=3 uid="uid://b41eclpfyicld"]
 
 [ext_resource type="Script" uid="uid://ce06niwnpb8ue" path="res://wSMS/message_queue.gd" id="1_7mcbc"]
 [ext_resource type="PackedScene" uid="uid://cnsj05jug3i8" path="res://wSMS/widgets/text_box.tscn" id="2_004ke"]
 [ext_resource type="PackedScene" uid="uid://cv03hm7tsnwe0" path="res://wSMS/widgets/image_box.tscn" id="3_ee3qx"]
+[ext_resource type="PackedScene" uid="uid://cniwpj1wojlxa" path="res://wSMS/widgets/choice_button.tscn" id="4_4gcg1"]
 [ext_resource type="Script" uid="uid://clxkiugid6bxa" path="res://wSMS/variables.gd" id="4_004ke"]
 [ext_resource type="PackedScene" uid="uid://bseme7yri5afk" path="res://wSMS/widgets/choice_select.tscn" id="4_fe37w"]
 [ext_resource type="Script" uid="uid://vi6tckl083ht" path="res://wSMS/scenes.gd" id="5_ee3qx"]
@@ -17,7 +18,7 @@ grow_vertical = 2
 script = ExtResource("1_7mcbc")
 text_scene = ExtResource("2_004ke")
 img_scene = ExtResource("3_ee3qx")
-choice_scene = ExtResource("4_fe37w")
+choice_button_scene = ExtResource("4_4gcg1")
 time_between_messages = 2.0
 
 [node name="VBox" type="VBoxContainer" parent="."]

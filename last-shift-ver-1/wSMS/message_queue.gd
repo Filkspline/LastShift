@@ -5,9 +5,12 @@ extends Control
 @export var image_directory: String = "res://wSMS/resources/images/"
 @export var script_directory: String = "res://wSMS/resources/scripts/"
 @export_subgroup("Widget Scenes")
+## Skin for text message
 @export var text_scene: PackedScene
+## Skin for image message
 @export var img_scene: PackedScene
-@export var choice_scene: PackedScene
+## Skin for choice button
+@export var choice_button_scene: PackedScene
 
 @export_subgroup("Textbox Options")
 ## Cap the amount of held message objects
@@ -51,6 +54,8 @@ func _ready():
 	$VBox.position += Vector2(20, -$VBox.get_theme_constant("separation")*6)
 	choice_box_y = $VBox.position.y+(5)*$VBox.get_theme_constant("separation")
 	TextBox.max_chars = char_width_of_box
+	
+	$ChoiceSelect.choice_button_scene = choice_button_scene
 
 ## Load a file (starts from script directory)
 func load_file(file_name: String):
