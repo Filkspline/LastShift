@@ -2,14 +2,16 @@ extends Node3D
 
 # Spawner settings
 @export var spawn_interval: float = 2.0  # Seconds between spawns
-@export var spawn_height: float = 5.0  # Height above basket to spawn items
+@export var spawn_height: float = 0.5  # Height above spawner to spawn items
 @export var spawn_radius: float = 0.01  # Random offset from center
-@export var max_items: int = 20  # Maximum items before stopping spawn
+@export var max_items: int = 4  # Maximum items before stopping spawn
 
 # References
 @export var grocery_item_scene: PackedScene
+
 var spawn_timer: Timer
 var item_count: int = 0
+var spawned_items: Array = []  # Track all spawned items
 
 func _ready():
 	# Create and setup timer
@@ -36,7 +38,10 @@ func spawn_item():
 	
 	# Create new item instance
 	var item = grocery_item_scene.instantiate()
-	get_parent().add_child(item)
+	
+	# Add as child of spawner (they'll be reparented later)
+	add_child(item)
+	spawned_items.append(item)
 	
 	# Random spawn position with slight offset
 	var random_offset = Vector3(
@@ -44,10 +49,15 @@ func spawn_item():
 		0,
 		randf_range(-spawn_radius, spawn_radius)
 	)
-	item.global_position = global_position + Vector3(0, spawn_height, 0) + random_offset
+	item.position = Vector3(0, spawn_height, 0) + random_offset
 	
-	# Random rotation on Z axis only
-	item.rotation.z = randf_range(0, TAU)
 	
 	item_count += 1
 	print("Spawned item #", item_count)
+
+func get_all_items() -> Array:
+	"""Return all spawned items"""
+	return spawned_items
+
+func is_full() -> bool:
+	return item_count >= max_items

@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://cf8c62s82kock" path="res://scripts/ai_customer.gd" id="1_customer"]
 
 [sub_resource type="Curve3D" id="Curve3D_path"]
+closed = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 5, 0, 5, 0, 0, 0, 0, 0, 0, 5, 0, 0),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 5, 0, 5, 0, 0, 0, 0, 0, 0, 4.89952, 0.020771027, 0.006335497),
 "tilts": PackedFloat32Array(0, 0, 0, 0)
 }
 point_count = 4
@@ -21,7 +22,7 @@ height = 1.8
 curve = SubResource("Curve3D_path")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="."]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-0.99999774, 0, -8.742258e-08, 0, 1, 0, 8.742258e-08, 0, -0.99999774, 0, 0, 0)
 rotation_mode = 1
 
 [node name="AICustomer" type="CharacterBody3D" parent="PathFollow3D"]

@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Pixelator="*res://scripts/autoload/pixelator.gd"
 
+[global_group]
+
+grocery_item=""
+
 [physics]
 
 common/physics_ticks_per_second=240

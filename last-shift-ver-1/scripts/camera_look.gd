@@ -1,7 +1,7 @@
 extends Camera3D
 
 @export var look_sensitivity: float = 15.0
-@export var max_angle: float = 10.0
+@export var max_angle: float = 30.0
 
 var mouse_position: Vector2 = Vector2.ZERO
 var viewport_size: Vector2

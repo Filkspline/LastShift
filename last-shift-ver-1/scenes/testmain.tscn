@@ -3,17 +3,17 @@
 [ext_resource type="Script" uid="uid://rk66aj3cs77e" path="res://scripts/camera_look.gd" id="1_camera"]
 [ext_resource type="PackedScene" uid="uid://cqht8mqfh4ojg" path="res://scenes/phone.tscn" id="2_u7vp4"]
 [ext_resource type="PackedScene" uid="uid://dga6olju0chdd" path="res://scenes/grocery_item.tscn" id="3_8cljg"]
-[ext_resource type="PackedScene" uid="uid://bawe2n6bmgohk" path="res://scenes/grocery_basket.tscn" id="4_mlspm"]
-[ext_resource type="PackedScene" uid="uid://b37rqy2bud8bo" path="res://scenes/grocery_spawner.tscn" id="5_41ujk"]
 [ext_resource type="PackedScene" uid="uid://bhexdqdgmwhcm" path="res://scenes/checkout_scanner.tscn" id="6_hbebi"]
+[ext_resource type="PackedScene" uid="uid://bawe2n6bmgohk" path="res://scenes/grocery_basket.tscn" id="7_82itb"]
 [ext_resource type="PackedScene" uid="uid://dcjuceamxttem" path="res://scenes/scanner_screen.tscn" id="7_e70go"]
+[ext_resource type="PackedScene" uid="uid://b37rqy2bud8bo" path="res://scenes/grocery_spawner.tscn" id="8_7ds6b"]
 [ext_resource type="PackedScene" uid="uid://xjr0nh2sc80d" path="res://scenes/customer.tscn" id="8_82itb"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1"]
 size = Vector2(20, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1"]
-size = Vector3(3, 0.119262695, 1)
+size = Vector3(3, 0.119262695, 0.9986572)
 
 [sub_resource type="BoxMesh" id="BoxMesh_1"]
 size = Vector3(3, 1, 1)
@@ -59,7 +59,7 @@ mesh = SubResource("BoxMesh_1")
 surface_material_override/0 = SubResource("StandardMaterial3D_1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Counter"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44036865, 0.61433554)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44036865, 0.5658126)
 shape = SubResource("BoxShape3D_1")
 
 [node name="Player" type="CharacterBody3D" parent="."]
@@ -74,21 +74,13 @@ shape = SubResource("CapsuleShape3D_1")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-fov = 80.0
+fov = 60.0
 script = ExtResource("1_camera")
 
 [node name="Phone" parent="." instance=ExtResource("2_u7vp4")]
 
 [node name="GroceryItem" parent="." instance=ExtResource("3_8cljg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.76905155, 2.4386106, -1.3911539)
-
-[node name="GroceryBasket" parent="." instance=ExtResource("4_mlspm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7543068, 0.9771831, -1.4079471)
-collision_layer = 3
-collision_mask = 3
-
-[node name="GrocerySpawner" parent="." instance=ExtResource("5_41ujk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8009067, 2.6468534, -1.411204)
 
 [node name="CheckoutScanner" parent="." instance=ExtResource("6_hbebi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.879503, -1.438007)
@@ -98,3 +90,16 @@ transform = Transform3D(1.2924367, 0, -0.47628507, 0, 1.4922825, 0, 0.7844242, 0
 
 [node name="CustomerPath" parent="." instance=ExtResource("8_82itb")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2, 1, -4)
+
+[node name="PositionMarkers" type="Node3D" parent="."]
+
+[node name="CustomerBuyingMarker" type="Marker3D" parent="PositionMarkers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.598515)
+
+[node name="GroceryBasket" parent="." instance=ExtResource("7_82itb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.120842, 1.0523983, -1.5107977)
+
+[node name="GrocerySpawner" parent="." instance=ExtResource("8_7ds6b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.17032, 2.0469093, -1.4130943)
+
+[editable path="CustomerPath"]
