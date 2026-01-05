@@ -4,6 +4,8 @@ extends TextBox
 @export_subgroup("Button options")
 @export var choice_button_scene: PackedScene
 @export var button_width: int
+## Add the text name of the choice to the contained lines, adding the choice to the message queue
+@export var echo_choice_names: bool = true
 
 signal add_to_stack(lines: PackedStringArray)
 var choices: Dictionary[int, PackedStringArray] = {}
@@ -19,7 +21,9 @@ func parse_line(text: String):
 	if text.begins_with("->"):
 		var n = text.trim_prefix("-> ")
 		var idx = choices.size()
-		choices[idx] = PackedStringArray(["&"+n])
+		if echo_choice_names: choices[idx] = PackedStringArray(["&"+n])
+		else: choices[idx] = PackedStringArray()
+			
 		_add_choice(n)
 	else:
 		choices[choices.size()-1].append(text)

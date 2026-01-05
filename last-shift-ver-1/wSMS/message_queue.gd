@@ -22,7 +22,10 @@ extends Control
 @export_subgroup("Misc. positioning")
 ## How far over the player's messages are
 @export var slide_to_the_right: float = 120.0
+## Move the entire nodeset over
 @export var offset: Vector2 = Vector2(0,0)
+## Move the choices boxes (applied after general offset)
+@export var choices_offset: Vector2 = Vector2(0,0)
 
 
 var message_queue: Array[TextBox]
@@ -206,6 +209,7 @@ func _parse_choice(text: String):
 			
 		"#endchoice":
 			choice_box.position.y = choice_box_y-(3-choice_box.choice_amnt)*$VBox.get_theme_constant("separation")
+			choice_box.position += choices_offset
 			# Wait for response
 			started_choosing.emit()
 			var lines: PackedStringArray = await choice_box.add_to_stack
