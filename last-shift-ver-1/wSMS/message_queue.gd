@@ -30,9 +30,11 @@ extends Control
 ## Alter location of choicebox in relation to main message queue (applied as well as general offset)
 @export var choices_offset: Vector2 = Vector2(0,0)
 
+@export_subgroup("Tweens")
+## Tween up and down when the choice box is active or not
+@export var tween_up_choicebox = true
+@export var tween_duration: float = 0.5
 
-var message_queue: Array[TextBox]
-var if_stack: Array[bool] = []
 ## Player chooicebox has now appeared
 signal started_choosing
 ## Player has selected a choicebox
@@ -43,19 +45,30 @@ signal done_scene
 signal done_named_scene(scene_name: String)
 ## A scene has started playing, sends out the scene's name
 signal started_scene(name: String)
+## Choicebox tween completed (up and down)
+signal tweened_choicebox
 
+var message_queue: Array[TextBox]
+var if_stack: Array[bool] = []
 @onready var choice_box: ChoiceSelect = $ChoiceSelect; 
 var choosing = false; var choice_box_y: int;
+var tween: Tween
 
+
+################
+# Initialisers #
+################
 
 func _ready(): 
 	$ChoiceSelect.slide(slide_to_the_right)
 	$VBox.size = size
-	$VBox.position += Vector2(20, -$VBox.get_theme_constant("separation")*6)
-	choice_box_y = $VBox.position.y+(5)*$VBox.get_theme_constant("separation")
+	#$VBox.position += Vector2(20, -$VBox.get_theme_constant("separation")*6)
+	choice_box_y = _base_choice_offset()
 	TextBox.max_chars = char_width_of_box
 	
 	$ChoiceSelect.choice_button_scene = choice_button_scene
+
+func _base_choice_offset(): return $VBox.position.y+(5)*$VBox.get_theme_constant("separation")
 
 ## Load a file (starts from script directory)
 func load_file(file_name: String):
@@ -67,6 +80,33 @@ func load_file(file_name: String):
 func move_offset(): 
 	$VBox.position += offset
 	choice_box_y = $VBox.position.y+(5)*$VBox.get_theme_constant("separation")
+
+###############
+# Epic tweens #
+###############
+
+## Tween the choicebox (if activated)
+func _tween_choicebox()->void:
+	if !tween_up_choicebox: return
+
+	# Tween up
+	var x_pos: float = position.x
+	tween = create_tween()
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "position", Vector2(x_pos, -_base_choice_offset()), tween_duration)
+
+	# Tween down
+	await done_choosing
+	tween.kill()
+	tween = create_tween()
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, "position", Vector2(x_pos, _base_choice_offset()), tween_duration)
+	await tween.finished
+	tween.kill()
+	
+	tweened_choicebox.emit()
 
 ###########
 # Testing #
@@ -95,6 +135,8 @@ func play_from_scene(scene_name: String):
 # expression = "{stuff}"
 ## Parses an array of strings into their respective commands. See comment for flags
 func add_multi(lots: Array[String]):
+	if lots.size()<1 or lots == null: return
+	
 	for ia: String in lots:
 		var i = ia.strip_escapes()
 		#print(i)
@@ -218,6 +260,8 @@ func _parse_choice(text: String):
 			# Wait for response
 			started_choosing.emit()
 			var lines: PackedStringArray = await choice_box.add_to_stack
+			done_choosing.emit()
+			if tween_up_choicebox: await tweened_choicebox
 			choice_box.hide()
 			await _run_subset(lines)
 			return
@@ -257,9 +301,10 @@ func new_image(path: String):
 
 ## Run all commands from a child object
 func _run_subset(lines: PackedStringArray):
+	print(lines)
 	choosing = false
 	await add_multi(lines)
-	done_choosing.emit()
+	print("a")
 
 #################
 # Move Controls #
