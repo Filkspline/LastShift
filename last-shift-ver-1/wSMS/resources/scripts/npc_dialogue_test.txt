@@ -3,9 +3,10 @@ hello
 i miss my wife, tails
 i miss her a lot
 #choice
--> thats so sad dr eggman
--> she was right to oml
-nuh uh that is the wrong choice
+	-> thats so sad dr eggman
+	-> she was right to leave oml
+		im going to kill you,
+		and kill you again.
 #endchoice
 thank you i will be paying in lots and lots of dollars
 #endscene

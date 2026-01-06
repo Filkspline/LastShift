@@ -16,14 +16,24 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wroxi")
 
-[node name="MessageQueue" parent="." instance=ExtResource("2_qt6ip")]
+[node name="Container" type="PanelContainer" parent="."]
 layout_mode = 1
-offset_left = -364.0
-offset_top = 26.0
-offset_right = -364.0
-offset_bottom = 26.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -55.0
+offset_right = 175.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MessageQueue" parent="Container" instance=ExtResource("2_qt6ip")]
+layout_mode = 2
 text_scene = ExtResource("2_1efgo")
 choice_button_scene = ExtResource("4_13jf6")
 cap_max_messages = true
-time_between_messages = 4.0
-choices_offset = Vector2(200, 70)
+offset = Vector2(-210, 70)
+choices_offset = Vector2(150, 120)

@@ -17,7 +17,7 @@ extends Control
 @export var cap_max_messages: bool = false
 ## Edit this depending on the phone size, won't work if it's higher than node size
 @export var max_messages: int = 1
-## How many chars long a textbox line can be
+## How many chars long a textbox line can be, sets static property of TextBox
 @export var char_width_of_box: int = 28
 ## Time between messages (decimal of a second)
 @export var time_between_messages: float = 1
@@ -25,9 +25,9 @@ extends Control
 @export_subgroup("Misc. positioning")
 ## How far over the player's messages are
 @export var slide_to_the_right: float = 120.0
-## Move the entire nodeset over
+## Move the entire nodeset over when "move_offset()" is called
 @export var offset: Vector2 = Vector2(0,0)
-## Move the choices boxes (applied after general offset)
+## Alter location of choicebox in relation to main message queue (applied as well as general offset)
 @export var choices_offset: Vector2 = Vector2(0,0)
 
 

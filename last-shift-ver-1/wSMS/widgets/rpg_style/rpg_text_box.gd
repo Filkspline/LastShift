@@ -1,6 +1,8 @@
 class_name RpgTextBox
 extends TextBox
 
+func _ready(): max_chars = 23
+
 func setup(text: String, is_you: bool):
 	assert(!_is_setup, "Cannot set up multiple times")
 	self.is_you = is_you

@@ -34,7 +34,7 @@ func setup(text: String, is_you: bool):
 	chars = text.length() if text.length()<= max_chars else max_chars
 	$Box/Label.add_theme_font_size_override("normal_font_size", font_size)
 
-## Won't split a word but splits words over to new-line if needed
+## Had to make my own newline isn't that fun. No support for \n btw
 func format_text(text: String)->String:
 	if text.length()<max_chars: return text
 	
