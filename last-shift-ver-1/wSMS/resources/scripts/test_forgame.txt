@@ -51,6 +51,12 @@ you died %icount
 
 #scene choicescene##
 { %choice="" }
+a
+&a
+a
+a
+&a
+a
 what do you want from mcdonalds
 
 #choice

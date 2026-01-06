@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfd8djcmukikj"]
+
+[ext_resource type="Script" uid="uid://cq8ayoa2gvmuh" path="res://wSMS/widgets/rpg_style/rpg_choice_button.gd" id="1_rb7hk"]
+[ext_resource type="PackedScene" uid="uid://b8j65ecv303q1" path="res://wSMS/widgets/rpg_style/rpg_text_box.tscn" id="2_2pfuy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4j6xf"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="RpgChoiceButton" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rb7hk")
+metadata/_custom_type_script = "uid://ch4ikosaxfp81"
+
+[node name="Message" parent="." instance=ExtResource("2_2pfuy")]
+layout_mode = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 23.0
+theme_type_variation = &"FlatButton"
+theme_override_styles/focus = SubResource("StyleBoxFlat_4j6xf")
+
+[connection signal="pressed" from="Button" to="." method="_on_pressed"]
