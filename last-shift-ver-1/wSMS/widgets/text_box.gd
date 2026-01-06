@@ -12,6 +12,19 @@ var is_you: bool = false
 var _is_setup: bool = false
 var chars: int; var slide_amnt: int = 0
 
+# Static textures
+static var _you_texturebox: StyleBoxFlat
+static var _me_texturebox: StyleBoxFlat
+
+func _init_textboxes():
+	var the_box: PanelContainer = $Box # from fnaf 4
+	# Initialise static components if not done already
+	if _you_texturebox == null:
+		_you_texturebox = the_box.get_theme_stylebox("panel").duplicate()
+		_me_texturebox = the_box.get_theme_stylebox("panel").duplicate()
+		_you_texturebox.bg_color = you_colour
+		_me_texturebox.bg_color = me_colour
+
 
 func setup(text: String, is_you: bool):
 	assert(!_is_setup, "Cannot set up multiple times")
@@ -96,11 +109,10 @@ func _clipped_pos()->float: return $Tail/TailMe.position.x - $Box.size.x-16
 
 ## Change the colour of the textbox components
 func _change_colour():
-	var new_stylebox: StyleBoxFlat = $Box.get_theme_stylebox("panel").duplicate()
+	if _you_texturebox == null: _init_textboxes()
 	if !is_you:
 		$Tail/TailMe.color = me_colour
-		new_stylebox.bg_color = me_colour
+		$Box.add_theme_stylebox_override("panel", _me_texturebox)
 	else:
 		$Tail/TailYou.color = you_colour
-		new_stylebox.bg_color = you_colour
-	$Box.add_theme_stylebox_override("panel", new_stylebox)
+		$Box.add_theme_stylebox_override("panel", _you_texturebox)
