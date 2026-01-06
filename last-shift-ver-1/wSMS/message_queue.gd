@@ -304,7 +304,6 @@ func _run_subset(lines: PackedStringArray):
 	print(lines)
 	choosing = false
 	await add_multi(lines)
-	print("a")
 
 #################
 # Move Controls #

@@ -35,5 +35,6 @@ layout_mode = 2
 text_scene = ExtResource("2_1efgo")
 choice_button_scene = ExtResource("4_13jf6")
 cap_max_messages = true
-offset = Vector2(-210, 70)
+offset = Vector2(-210, -110)
 choices_offset = Vector2(150, 120)
+tween_up_choicebox = false
